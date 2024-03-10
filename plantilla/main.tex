@@ -1,0 +1,192 @@
+\documentclass[a4paper]{article} 
+\input{head}
+\newcommand{\pow}[2]{#1^{#2}}
+\newcommand{\supra}[1]{\textsuperscript{#1}}
+\begin{document}
+
+%-------------------------------
+%	TITLE SECTION
+%-------------------------------
+
+\fancyhead[C]{}
+\hrule \medskip % Upper rule
+\begin{minipage}{0.35\textwidth} 
+\raggedright
+\footnotesize
+Fausto David Hernández Jasso \hfill\\   
+%317000928 \hfill\\
+%fausto.david.hernandez.jasso@ciencias.unam.mx
+\end{minipage}
+\begin{minipage}{0.4\textwidth} 
+\centering 
+\large 
+Álgebra Lineal II\\ 
+\normalsize 
+Triángulación y Diagonalización\\ 
+\end{minipage}
+\begin{minipage}{0.24\textwidth} 
+\raggedleft
+\today\hfill\\
+\end{minipage}
+\medskip\hrule 
+\bigskip
+\section{Ejercicios}
+\subsection{Ejercicio 1}
+Sean \(A, B\) matrices en \(\mathcal{M}_{3}\left(\mathbb{C}\right)\). Demuestra que
+\[
+    det\left(AB - BA\right) = \frac{1}{3}Tr\left[\left(AB - BA\right)^3\right]
+\]
+\noindent
+\subsubsection*{Solución}
+\begin{proof}
+    Como \(A \in \mathcal{M}_{3}\left(\mathbb{C}\right)\) y \(B \in \mathcal{M}_{3}\left(\mathbb{C}\right)\)
+    entonces \(AB \in \mathcal{M}_{3}\left(\mathbb{C}\right)\) y \(BA \in \mathcal{M}_{3}\left(\mathbb{C}\right)\).
+    Como \(\mathcal{M}_{3}\left(\mathbb{C}\right)\) es un subespacio de \(\mathcal{M}_{n}\left(F\right)\)
+    entonces tenemos que \(AB - BA \in \mathcal{M}_{3}\left(\mathbb{C}\right)\).
+    \newline
+    Sabemos que el polinomio característico de \(C \in \mathcal{M}_{n}\left(F\right)\) es de
+    la forma
+    \[
+        \chi_{C}\left(X\right) = X^{n} - Tr\left(C\right)X^{n-1} + \dotsc + \left(-1\right)^{n}det(C)
+    \]
+    En particular, haciendo \(C = AB - BA, F = \mathbb{C}\) y \(n = 3\) tenemos que
+    \[
+        \chi_{AB - BA}\left(X\right) = X^{3} - Tr\left(AB - BA\right)X^{2} + \dotsc - det(AB - BA)
+    \]
+    Como \(\chi_{AB - BA}\left(X\right) \in \mathbb{C}[X]\) entonces por el teorema fundamental 
+    del álgebra \(\chi_{AB - BA}\) se divide sobre \(\mathbb{C}\), ya que recordemos que las 
+    entradas de ambas matrices están en \(\mathbb{C}\). Sean \(a, b\) y \(c\) eigenvalores de 
+    \(\chi_{AB - BA}\), y como sabemos que \(\chi_{AB - BA}\) se divide sobre \(\mathbb{C}\) ésto 
+    por definición es que
+    \[
+        \chi_{AB - BA}\left(X\right) = r(X - a)(X - b)(X - c)
+    \]
+    con \(r, a, b\) y \(c\) en \(\mathbb{C}\), como el polinomio característico es mónico se sigue 
+    que \(r = 1\), entonces
+    \[
+        \chi_{AB - BA}\left(X\right) = (X - a)(X - b)(X - c)
+    \]
+    Consecuntemente
+    \begin{align*}
+        \chi_{AB - BA}\left(X\right) &= (X - a)(X - b)(X - c) \\
+                                     &=  X^3 - cX^2 - bX^2 - aX^2 + bcX + acX + abX - abc \\
+                                     &= X^3 - (a + b + c)X^2 + (ab + bc + ac)X - abc
+    \end{align*}
+    Como el polinomio característico es único entonces
+    \[
+        X^{3} - Tr\left(AB - BA\right)X^{2} + \dotsc - det(AB - BA) = X^3 - (a + b + c)X^2 + (ab + bc + ac)X - abc
+    \]
+    Así obtenemos las siguientes igualdades
+    \begin{align*}
+        Tr\left(AB - BA\right) &= a + b + c \\
+        det(AB - BA) &= abc
+    \end{align*}
+    Notemos que \(Tr\left(AB - BA\right) = 0\) ya que
+    \begin{align*}
+        A &= 
+        \begin{pmatrix}
+            a_{1} & a_{2} & a_{3}\\
+            a_{4} & a_{5} & a_{6}\\
+            a_{7} & a_{8} & a_{9}
+        \end{pmatrix} \\
+        B &= 
+        \begin{pmatrix}
+            b_{1} & b_{2} & b_{3}\\
+            b_{4} & b_{5} & b_{6}\\
+            b_{7} & b_{8} & b_{9}
+        \end{pmatrix}
+    \end{align*}
+    Calculando \(AB\)
+    \begin{align*}
+        AB &=     
+        \begin{pmatrix}
+            a_{1} & a_{2} & a_{3}\\
+            a_{4} & a_{5} & a_{6}\\
+            a_{7} & a_{8} & a_{9}
+        \end{pmatrix}
+        \begin{pmatrix}
+            b_{1} & b_{2} & b_{3}\\
+            b_{4} & b_{5} & b_{6}\\
+            b_{7} & b_{8} & b_{9}
+        \end{pmatrix} \\
+        &=
+        \begin{pmatrix}
+            a_{1} b_{1} + a_{2} b_{4} + a_{3} b_{7} & a_{1} b_{2} + a_{2} b_{5} + a_{3} b_{8} & a_{1} b_{3} + a_{2} b_{6} + a_{3} b_{9} \\
+            a_{4} b_{1} + a_{5} b_{4} + a_{6} b_{7} & a_{4} b_{2} + a_{5} b_{5} + a_{6} b_{8} & a_{4} b_{3} + a_{5} b_{6} + a_{6} b_{9}\\
+            a_{7} b_{1} + a_{8} b_{4} + a_{9} b_{7} & a_{7} b_{2} + a_{8} b_{5} + a_{9} b_{8} & a_{7} b_{3} + a_{8} b_{6} + a_{9} b_{9}
+        \end{pmatrix}
+    \end{align*}
+    Calculando \(BA\)
+    \begin{align*}
+        BA &=
+        \begin{pmatrix}
+            b_{1} & b_{2} & b_{3}\\
+            b_{4} & b_{5} & b_{6}\\
+            b_{7} & b_{8} & b_{9}
+        \end{pmatrix}
+        \begin{pmatrix}
+            a_{1} & a_{2} & a_{3}\\
+            a_{4} & a_{5} & a_{6}\\
+            a_{7} & a_{8} & a_{9}
+        \end{pmatrix}\\
+        &=
+        \begin{pmatrix}
+            a_{1} b_{1} + a_{4} b_{2} + a_{7} b_{3} & a_{2} b_{1} + a_{5} b_{2} + a_{8} b_{3} & a_{3} b_{1} + a_{6} b_{2} + a_{9} b_{3}\\
+            a_{1} b_{4} + a_{4} b_{5} + a_{7} b_{6} & a_{2} b_{4} + a_{5} b_{5} + a_{8} b_{6} & a_{3} b_{4} + a_{6} b_{5} + a_{9} b_{6}\\
+            a_{1} b_{7} + a_{4} b_{8} + a_{7} b_{9} & a_{2} b_{7} + a_{5} b_{8} + a_{8} b_{9} & a_{3} b_{7} + a_{6} b_{8} + a_{9} b_{9}
+        \end{pmatrix}
+    \end{align*}
+    Calculando \(AB - BA\)
+    \[
+        \begin{smallmatrix}
+            a_{2} b_{4} + a_{3} b_{7} - a_{4} b_{2} - a_{7} b_{3} & a_{1} b_{2} - a_{2} b_{1} + a_{2} b_{5} + a_{3} b_{8} - a_{5} b_{2} - a_{8} b_{3} & a_{1} b_{3} + a_{2} b_{6} - a_{3} b_{1} + a_{3} b_{9} - a_{6} b_{2} - a_{9} b_{3}\\
+            - a_{1} b_{4} + a_{4} b_{1} - a_{4} b_{5} + a_{5} b_{4} + a_{6} b_{7} - a_{7} b_{6} & - a_{2} b_{4} + a_{4} b_{2} + a_{6} b_{8} - a_{8} b_{6} & - a_{3} b_{4} + a_{4} b_{3} + a_{5} b_{6} - a_{6} b_{5} + a_{6} b_{9} - a_{9} b_{6}\\
+            - a_{1} b_{7} - a_{4} b_{8} + a_{7} b_{1} - a_{7} b_{9} + a_{8} b_{4} + a_{9} b_{7} & - a_{2} b_{7} - a_{5} b_{8} + a_{7} b_{2} + a_{8} b_{5} - a_{8} b_{9} + a_{9} b_{8} & - a_{3} b_{7} - a_{6} b_{8} + a_{7} b_{3} + a_{8} b_{6}
+        \end{smallmatrix}
+    \]
+    Así 
+    \begin{align*}
+        Tr(AB - BA) &=  a_{2} b_{4} + a_{3} b_{7} - a_{4} b_{2} - a_{7} b_{3} 
+        - a_{2} b_{4} + a_{4} b_{2} + a_{6} b_{8} - a_{8} b_{6}
+        - a_{3} b_{7} - a_{6} b_{8} + a_{7} b_{3} + a_{8} b_{6} \\
+        &= \left( a_{2} b_{4} - a_{2} b_{4} \right) + \left( a_{3} b_{7} - a_{3} b_{7}\right) +
+           \left(a_{4} b_{2} - a_{4} b_{2}\right) + \left(a_{7} b_{3} - a_{7} b_{3} \right) +
+           \left(a_{6} b_{8} - a_{6} b_{8}\right) + \left(a_{8} b_{6} - a_{8} b_{6}\right) \\
+        &= 0
+    \end{align*}
+    También sabemos que 
+    \[
+        Tr(AB - BA) = a + b + c
+    \]
+    Así
+    \[
+        a + b + c = 0
+    \]
+    Por el teorema de \textbf{Cayley-Hamilton} tenemos que
+    \[
+        \chi_{AB - BA}\left(AB - BA\right) = O_{3}
+    \]
+    Es decir
+    \begin{align*}
+        (AB - BA)^3 - Tr(AB - BA)(AB - BA)^2 + (ab + bc + ac)(AB - BA) - det(AB - BC)I_{3} &= O_{3} \\
+        (AB - BA)^3 - Tr(AB - BA)(AB - BA)^2 + (ab + bc + ac)(AB - BA) &= O_{3} + det(AB - BC)I_{3} \\
+        (AB - BA)^3 - Tr(AB - BA)(AB - BA)^2 + (ab + bc + ac)(AB - BA) &= det(AB - BC)I_{3}
+    \end{align*}
+    Como \(Tr(AB - BA) = 0\) entonces
+    \begin{align*}
+        (AB - BA)^3 + (ab + bc + ac)(AB - BA) &= det(AB - BC)I_{3}
+    \end{align*}
+    Sacando la traza de ambos lados
+    \begin{align*}
+        Tr((AB - BA)^3 + (ab + bc + ac)(AB - BA)) &= Tr(det(AB - BC)I_{3}) \\
+        Tr((AB - BA)^3) + Tr((ab + bc + ac)(AB - BA)) &= Tr(det(AB - BC)I_{3}) \\
+        Tr((AB - BA)^3) + Tr((ab + bc + ac)(AB - BA)) &= det(AB - BC)Tr(I_{3}) \\
+        Tr((AB - BA)^3) + (ab + bc + ac)Tr(AB - BA) &= det(AB - BC)Tr(I_{3}) \\
+        Tr((AB - BA)^3) + (ab + bc + ac)0 &= det(AB - BC)Tr(I_{3}) \\
+        Tr((AB - BA)^3) &= det(AB - BC)Tr(I_{3}) \\
+        Tr((AB - BA)^3) &= det(AB - BC)(3) \\
+        Tr((AB - BA)^3) &= 3det(AB - BC) \\
+        \frac{1}{3} Tr((AB - BA)^3) &= det(AB - BC) \\
+    \end{align*}
+\end{proof}
+\end{document}
